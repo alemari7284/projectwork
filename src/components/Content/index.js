@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import { getGames, getTopGames, searchCategories } from '../../api/twitch';
+import { Grid } from "@material-ui/core";
+import GameCard from "./GameCard";
 
 // setTheArray(oldArray => [...oldArray, newElement]);
 
@@ -27,26 +29,35 @@ const Content = (props) => {
   }
 
       return (
-      <div>
-        <div>
+        //TOP GAMES
+        <Grid container spacing={2} direction="rows">
             {
               props.passadati.map((el, i)=>{
-                return  <a key={i} href="#"> <img src={el.box_art_url}></img> </a>
+                return (
+                  <Grid item xs={12} sm={6} md={3} lg={3}>
+                    <a key={i} href="#"> <img src={el.box_art_url}></img> </a>
+                    {/* <GameCard 
+                    key={i}
+                    url={el.box_art_url}
+                    /> */}
+                  </Grid>
+                ) 
               })
             }
-        </div>
-        <div>
+        {/* SFOGLIA CATEGORIE */}
             {
               props.bool && props.passacategorie2.map((el, i) => {
-                return <a onClick={getInfo} id={i} key={i} href="#"> <img src={el.box_art_url} el={el.name}></img> </a>
+                return ( 
+                <Grid item xs={12} md={2} lg={2}>
+                  <a onClick={getInfo} id={i} key={i} href="#"> <img src={el.box_art_url} el={el.name}></img> </a>
+                </Grid>
+                )
               }) 
             }
-        </div>
         <div id="sel">
-
         </div>
-      </div>
-          )
+        </Grid>
+        )
     }
 
     export default Content;
