@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getTopGames, searchCategories } from './api/twitch';
+import { getTopGames, searchCategories, getGames } from './api/twitch';
 import './App.css';
 import Content from './components/Content';
 import Navbar from './components/Navbar';
@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     searchCategories({ query: `/${valore2}` })
     .then(response => setCat2(response.data))
-    .then(console.log(valore2, cat2))
+    .then(console.log(cat2))
     .then(() => {
       valore2 != "" ? setShow(true) : setShow(false);
     })
@@ -47,6 +47,7 @@ function App() {
     setBrowse(b);
   }
   
+
   return (
     <div className="App">
       <Navbar setTopGames={getTop} setCategories={getCat} sfoglia={browseCategories}/>
